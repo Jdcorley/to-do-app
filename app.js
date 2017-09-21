@@ -1,7 +1,8 @@
 function onReady() {
   //intial state
-  var toDos = [];
-  var addToDoForm = document.getElementById('addToDoForm');
+  const toDos = [];
+  const addToDoForm = document.getElementById('addToDoForm');
+  const todoList = document.getElementById('toDoList');
   //change state function
   function createNewToDo() {
     //access text input
@@ -18,8 +19,6 @@ function onReady() {
   }
   //render user interface function
   function renderTheUI(toDos) {
-    //get ul
-    var todoList = document.getElementById('toDoList');
     //Set new li to empty string
     todoList.innerHTML = '';
     // function forEach method for array toDos
@@ -39,7 +38,6 @@ function onReady() {
   //event listener reset button
   addToDoForm.addEventListener('reset',function(event){
     event.preventDefault();
-    var todoList = document.getElementById('toDoList');
     toDos.length = 0;
     while(todoList.firstChild){
       todoList.removeChild(todoList.firstChild);
