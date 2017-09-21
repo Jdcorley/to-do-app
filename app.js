@@ -20,9 +20,17 @@ function onReady() {
     newLi.appendChild(checkbox);
     //empty the input
     newToDoText.value = '';
-
+    //Add event listener to button type=reset
   });
-}
+  addToDoForm.addEventListener('reset', event => {
+    event.preventDefault();
+    //while toDoList has a child remove it
+    while(toDoList.firstChild){
+      toDoList.removeChild(toDoList.firstChild);
+    }
+
+});
+};
 window.onload = function(){
     onReady();
 };
