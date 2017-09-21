@@ -1,36 +1,49 @@
 function onReady() {
-  const addToDoForm = document.getElementById('addToDoForm');
-  const newToDoText = document.getElementById('newToDoText');
-  const toDoList = document.getElementById('toDoList');
-  addToDoForm.addEventListener('submit', event => {
-    event.preventDefault();
-    // get the text
-    let title = newToDoText.value;
-    // create a new li
-    let newLi = document.createElement('li');
-    //create a new input for the checkbox
-    let checkbox = document.createElement('input');
-    // set the input's type to checkbox
-    checkbox.type = 'checkbox';
-    // set the title
-    newLi.textContent = title;
-    // attach it to the ul
-    toDoList.appendChild(newLi);
-    // attach the checkbox to the li
-    newLi.appendChild(checkbox);
-    //empty the input
+  //intial state
+  var toDos = [];
+  var addToDoForm = document.getElementById('addToDoForm');
+  //change state function
+  function createNewToDo() {
+    //access text input
+    var newToDoText = document.getElementById('newToDoText');
+    //push toDos toDoText value to task and complete to false in array
+    toDos.push({
+      title: newToDoText.value,
+      complete: false
+    });
+    //clear textbox input
     newToDoText.value = '';
-    //Add event listener to button type=reset
-  });
-  addToDoForm.addEventListener('reset', event => {
+    //Call render UI function
+    renderTheUI(toDos);
+  }
+  //render user interface function
+  function renderTheUI(toDos) {
+    //get ul
+    var todoList = document.getElementById('toDoList');
+    //Set new li to empty string
+    todoList.innerHTML = '';
+    // function forEach method for array toDos
+    toDos.forEach(function(toDos) {
+      //create li and checkbox
+      var newLi = document.createElement('li');
+      var checkbox = document.createElement('input');
+      checkbox.type = "checkbox";
+      //add toDo.title to newLi via innerHTML
+      newLi.innerHTML = toDos.title;
+      // now update the DOM
+      todoList.appendChild(newLi);
+      newLi.appendChild(checkbox);
+    });
+}
+  //event listener submit button
+  addToDoForm.addEventListener('submit', function(event) {
     event.preventDefault();
-    //while toDoList has a child remove it
-    while(toDoList.firstChild){
-      toDoList.removeChild(toDoList.firstChild);
-    }
+    createNewToDo();
+  });
+  //Call render UI function
+  renderTheUI(toDos);
+}
 
-});
-};
-window.onload = function(){
-    onReady();
+window.onload = function() {
+  onReady();
 };
