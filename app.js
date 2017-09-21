@@ -35,6 +35,16 @@ function onReady() {
       newLi.appendChild(checkbox);
     });
 }
+
+  //event listener reset button
+  addToDoForm.addEventListener('reset',function(event){
+    event.preventDefault();
+    var todoList = document.getElementById('toDoList');
+    toDos.length = 0;
+    while(todoList.firstChild){
+      todoList.removeChild(todoList.firstChild);
+    }
+  });
   //event listener submit button
   addToDoForm.addEventListener('submit', function(event) {
     event.preventDefault();
